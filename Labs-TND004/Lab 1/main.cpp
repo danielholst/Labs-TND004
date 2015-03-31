@@ -157,7 +157,7 @@ int main()
     {
         //transform all upper-case letters to lower-case letters
         transform(w.begin(), w.end(), w.begin(), ::tolower);
-        //words = words + w;
+        words = words + w;
     }
 
     cout << "The words sorted alphabetically: "

@@ -510,8 +510,24 @@ void Set<T>::clear()
 template<typename T>
 bool Set<T>::operator<=(const Set& b) const
 {
-    //ADD CODE
-    return false; //delete this code
+    Node* ptr = head->next;
+    int sizeOfSet = cardinality();
+    int counter = 0;
+    
+    while (ptr != tail)
+    {
+        if ( b.is_member( ptr->value))
+        {
+            counter++;
+        }
+        
+        ptr = ptr->next;
+    }
+    
+    if ( counter == sizeOfSet)
+        return true;
+    else
+        return false;
 }
 
 
@@ -520,8 +536,25 @@ bool Set<T>::operator<=(const Set& b) const
 template<typename T>
 bool Set<T>::operator==(const Set& b) const
 {
-    //ADD CODE
-    return false; //delete this code
+    Node* ptr = head->next;
+    int sizeOfSet1 = cardinality();
+    int sizeOfSet2 = b.cardinality();
+    int counter = 0;
+    
+    while (ptr != tail)
+    {
+        if ( b.is_member( ptr->value))
+        {
+            counter++;
+        }
+        
+        ptr = ptr->next;
+    }
+    
+    if ( counter == sizeOfSet1 && counter == sizeOfSet2)
+        return true;
+    else
+        return false;
 }
 
 
@@ -530,8 +563,25 @@ bool Set<T>::operator==(const Set& b) const
 template<typename T>
 bool Set<T>::operator<(const Set& b) const
 {
-    //ADD CODE
-    return false; //delete this code
+    Node* ptr = head->next;
+    int sizeOfSet1 = cardinality();
+    int sizeOfSet2 = b.cardinality();
+    int counter = 0;
+    
+    while (ptr != tail)
+    {
+        if ( b.is_member( ptr->value))
+        {
+            counter++;
+        }
+        
+        ptr = ptr->next;
+    }
+    
+    if ( counter == sizeOfSet1 && counter < sizeOfSet2)
+        return true;
+    else
+        return false;
 }
 
 
@@ -600,36 +650,39 @@ Set<T> Set<T>::_union(const Set& b) const
 {
     Set<T> c;
     
-    Node* temp = head->next;
-    while (temp != tail)
+    Node* ptr1 = head->next;
+    Node* ptr2 = b.head->next;
+    
+    while (ptr1 != tail && ptr2 != b.tail)
     {
-        c.insert(c.tail, temp->value);
-        temp = temp->next;
+        if( ptr1->value < ptr2->value)
+        {
+            c.insert(c.tail, ptr1->value);
+            ptr1 = ptr1->next;
+        }
+        else if(ptr1->value > ptr2->value)
+        {
+            c.insert(c.tail, ptr2->value);
+            ptr2 = ptr2->next;
+        }
+        else        //ptr1->value == ptr2->value
+        {
+            c.insert(c.tail, ptr2->value);
+            ptr1 = ptr1->next;
+            ptr2 = ptr2->next;
+        }
     }
     
-    cout << "hej " ;
-    
-    Node* ptr1 = b.head->next;
-    Node* ptr2 = c.head->next;
-    
-    while (ptr1 != b.tail)
+    if( ptr1 != tail)
     {
-        if (!is_member(ptr1->value))
-        {
-            while (ptr2 != c.tail)
-            {
-                if( ptr2->next == c.tail)
-                    c.insert(c.tail, ptr1->value);
-                
-                else if( ptr2->prev->value < ptr1->value && ptr2->value > ptr1->value)
-                {
-                    c.insert(ptr2, ptr1->value);
-                }
-                else
-                    ptr2 = ptr2->next;
-            }
-        }
+        c.insert(c.tail, ptr1->value);
         ptr1 = ptr1->next;
+    }
+    
+    if(ptr2 != b.tail)
+    {
+        c.insert(c.tail, ptr2->value);
+        ptr2 = ptr2->next;
     }
     
     return c;
@@ -641,8 +694,21 @@ Set<T> Set<T>::_union(const Set& b) const
 template<typename T>
 Set<T> Set<T>::_intersection(const Set& b) const
 {
-    //ADD CODE
-    return *this; //delete this code
+    Set<T> c;
+    
+    Node* ptr1 = head->next;
+    
+    while ( ptr1 != tail)
+    {
+        if(b.is_member(ptr1->value))
+        {
+            c.insert(c.tail, ptr1->value);
+        }
+        
+        ptr1 = ptr1->next;
+    }
+    
+    return c;
 }
 
 
@@ -651,8 +717,22 @@ Set<T> Set<T>::_intersection(const Set& b) const
 template<typename T>
 Set<T> Set<T>::_difference(const Set& b) const
 {
-    //ADD CODE
-    return *this; //delete this code
+    Set<T> c;
+    
+    Node* ptr1 = head->next;
+    
+    while ( ptr1 != tail)
+    {
+        if(!b.is_member(ptr1->value))
+        {
+            c.insert(c.tail, ptr1->value);
+        }
+        
+        ptr1 = ptr1->next;
+    }
+    
+    return c;
+    
 }
 
 

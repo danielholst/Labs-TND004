@@ -668,7 +668,7 @@ Set<T> Set<T>::_union(const Set& b) const
             ptr2 = ptr2->next;
         }
         else        //ptr1->value == ptr2->value
-        {
+        {git
             c.insert(c.tail, ptr2->value);
             ptr1 = ptr1->next;
             ptr2 = ptr2->next;

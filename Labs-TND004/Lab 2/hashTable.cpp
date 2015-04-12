@@ -39,7 +39,8 @@ int nextPrime( int n )
 HashTable::HashTable(int table_size, HASH f)
     : size(nextPrime(table_size)), h(f), nItems(0)
 {
-    hTable = nullptr; //to be deleted
+    int hTable[table_size];
+
 }
 
 

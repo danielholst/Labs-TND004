@@ -1,6 +1,6 @@
 /*
   Name: hashTable.h
-  Author: Aida Nordman
+  Author: Daniel Holst
   Course: TND004, Lab 2
   Description: class Item
 */

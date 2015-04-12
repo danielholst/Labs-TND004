@@ -74,7 +74,11 @@ double HashTable::loadFactor() const
 // IMPLEMENT
 int HashTable::find(string key) const
 {
-    return NOT_FOUND; //to be deleted
+    int hashVal = h(key, size);
+    if(hTable[hashVal] == NULL)
+        return NOT_FOUND;
+    else
+        return hTable[hashVal]->value;
 }
 
 
@@ -84,6 +88,18 @@ int HashTable::find(string key) const
 // IMPLEMENT
 void HashTable::insert(string key, int v)
 {
+    int hashVal = h(key, size);
+    Item* newItem = new Item(key, v);
+
+    //if key already exist remove the old one
+    if( find(key) != NULL)
+    {
+        remove(key);
+    }
+
+    hTable[hashVal] = newItem;
+
+    if (loadFactor() > 0.5) reHash();
 
 }
 
@@ -94,7 +110,15 @@ void HashTable::insert(string key, int v)
 // IMPLEMENT
 bool HashTable::remove(string key)
 {
-    return true; //to be deleted
+    if (find(key) == NOT_FOUND)
+        return false;
+    else
+    {
+        int hashVal = h(key, size);
+        hTable[hashVal] = NULL;
+        return true;
+    }
+
 }
 
 

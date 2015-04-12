@@ -39,7 +39,12 @@ int nextPrime( int n )
 HashTable::HashTable(int table_size, HASH f)
     : size(nextPrime(table_size)), h(f), nItems(0)
 {
-    int hTable[table_size];
+    //create array (hTable) with pointers to items
+    hTable = new Item*[size];
+    for(int i = 0; i < size; i++)
+    {
+        hTable[i] = NULL;
+    }
 
 }
 
@@ -48,7 +53,12 @@ HashTable::HashTable(int table_size, HASH f)
 // IMPLEMENT
 HashTable::~HashTable()
 {
-
+    for (int i = 0; i < size; i++)
+    {
+        if (hTable[i] != NULL)
+            delete hTable[i];
+    }
+    delete[] hTable;
 }
 
 

@@ -78,7 +78,16 @@ int HashTable::find(string key) const
     if(hTable[hashVal] == NULL)
         return NOT_FOUND;
     else
-        return hTable[hashVal]->value;
+    {
+        while (hTable[hashVal] != NULL)   //loop until empty slot in table
+        {
+            if(hTable[hashVal]->key == key)
+                return hTable[hashVal]->value;
+            hashVal++;
+        }
+        return NOT_FOUND;
+    }
+
 }
 
 
@@ -91,13 +100,24 @@ void HashTable::insert(string key, int v)
     int hashVal = h(key, size);
     Item* newItem = new Item(key, v);
 
-    //if key already exist remove the old one
-    if( find(key) != NULL)
+    if(hTable[hashVal] == NULL)     // if empty -> insert
     {
-        remove(key);
+        hTable[hashVal] = newItem;
     }
-
-    hTable[hashVal] = newItem;
+    else
+    {
+        while (hTable[hashVal] != NULL) //loop until empty slot in table
+        {
+            if(hTable[hashVal]->key == key)     // if key already exist in table remove old one
+            {
+                remove(key);
+                hTable[hashVal] = newItem;
+                break;
+            }
+            hashVal++;
+        }
+        hTable[hashVal] = newItem;
+    }
 
     if (loadFactor() > 0.5) reHash();
 

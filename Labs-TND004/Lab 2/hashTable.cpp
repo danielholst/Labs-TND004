@@ -103,23 +103,31 @@ void HashTable::insert(string key, int v)
     if(hTable[hashVal] == NULL)     // if empty -> insert
     {
         hTable[hashVal] = newItem;
+        nItems++;
     }
     else
     {
         while (hTable[hashVal] != NULL) //loop until empty slot in table
         {
-            if(hTable[hashVal]->key == key)     // if key already exist in table remove old one
+            if(hTable[hashVal]->key == key)     // if key already exist in table remove old one and insert new to get new value
             {
                 remove(key);
                 hTable[hashVal] = newItem;
                 break;
             }
             hashVal++;
+
+            if( hashVal == size )  // if in the last slot of array start from the top
+            {
+                hashVal = 0;
+            }
         }
         hTable[hashVal] = newItem;
+        nItems++;
     }
 
-    if (loadFactor() > 0.5) reHash();
+    if (loadFactor() > MAX_LOAD_FACTOR)
+        reHash();
 
 }
 
@@ -135,8 +143,18 @@ bool HashTable::remove(string key)
     else
     {
         int hashVal = h(key, size);
-        hTable[hashVal] = NULL;
-        return true;
+        while (hTable[hashVal] != NULL)   // loop to find key
+        {
+            if(hTable[hashVal]->key == key)
+            {
+                Item* delItem = new Item("", -1);   // Deleted item
+                hTable[hashVal] = delItem;
+                return true;
+                nItems--;
+            }
+            hashVal++;
+        }
+    return false;
     }
 
 }
@@ -174,6 +192,11 @@ void HashTable::display(ostream& os)
 // IMPLEMENT
 ostream& operator<<(ostream& os, const HashTable& T)
 {
+    for ( int i = 0; i < T.size; i++)
+    {
+        os << T.hTable[i]->value << " ";
+    }
+
     return os;
 }
 
@@ -183,5 +206,43 @@ ostream& operator<<(ostream& os, const HashTable& T)
 // IMPLEMENT
 void HashTable::reHash()
 {
+    nItems = 0;
+    int NEXT_TABLE_SIZE = nextPrime(size+1);    // new size of array
 
+    string keys[size];        //to store old keys and values
+    int values[size];
+
+    for(int i = 0; i < size; i++)       //loop through old array and store all values in new arrays
+    {
+        if(hTable[i] != NULL)
+        {
+            keys[i] = hTable[i]->key;
+            values[i] = hTable[i]->value;
+        }
+        else
+        {
+            keys[i] = "";
+            values[i] = 0;
+        }
+    }
+
+    int prevSize = size;
+    size = NEXT_TABLE_SIZE;
+
+    hTable = new Item*[size];   // make hTable to the new size
+    for(int i = 0; i < size; i++)
+    {
+        hTable[i] = NULL;
+    }
+
+    for( int i = 0; i < prevSize; i++)  // insert values to hTable again
+    {
+        if(values[i] != 0)
+        {
+            insert(keys[i], values[i]);
+        }
+    }
+
+    cout << "Rehashing ..." << endl;
+    cout << " new size = " << NEXT_TABLE_SIZE << endl;
 }

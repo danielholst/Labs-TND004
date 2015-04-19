@@ -109,6 +109,9 @@ int main()
             break;
 
         case 5:
+
+
+        case 6:
             go = false;
             break;
 

@@ -476,18 +476,7 @@ bool Set<T>::is_member (T val) const
 template<typename T>
 int Set<T>::cardinality() const
 {
-    int counter = 0;
-
-    Node* ptr = head->next;
-    while(ptr != tail)
-    {
-        counter++;
-
-        ptr = ptr->next;
-    }
-
     return counter;
-
 }
 
 

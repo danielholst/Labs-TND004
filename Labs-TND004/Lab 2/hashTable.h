@@ -173,6 +173,9 @@ private:
     //disable assignment operator
     const HashTable& operator=(const HashTable &);
 
+    // subscript operator
+    int operator[](const HashTable &);
+
 };
 
 #endif

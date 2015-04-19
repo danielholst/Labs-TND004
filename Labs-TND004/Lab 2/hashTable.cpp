@@ -84,6 +84,11 @@ int HashTable::find(string key) const
             if(hTable[hashVal]->key == key)
                 return hTable[hashVal]->value;
             hashVal++;
+
+            if( hashVal == size )  // if in the last slot of array start from the top
+            {
+                hashVal = 0;
+            }
         }
         return NOT_FOUND;
     }
@@ -109,6 +114,11 @@ void HashTable::insert(string key, int v)
     {
         while (hTable[hashVal] != NULL) //loop until empty slot in table
         {
+            if(hTable[hashVal]->value == -1)
+            {
+                hTable[hashVal] = newItem;
+                break;
+            }
             if(hTable[hashVal]->key == key)     // if key already exist in table remove old one and insert new to get new value
             {
                 remove(key);
@@ -143,7 +153,7 @@ bool HashTable::remove(string key)
     else
     {
         int hashVal = h(key, size);
-        while (hTable[hashVal] != NULL)   // loop to find key
+        while (hTable[hashVal] != NULL )   // loop to find key
         {
             if(hTable[hashVal]->key == key)
             {
@@ -153,6 +163,11 @@ bool HashTable::remove(string key)
                 nItems--;
             }
             hashVal++;
+            if( hashVal == (size))  // if in the last slot of array start from the top
+            {
+                hashVal = 0;
+            }
+
         }
     return false;
     }
@@ -207,7 +222,7 @@ ostream& operator<<(ostream& os, const HashTable& T)
 void HashTable::reHash()
 {
     nItems = 0;
-    int NEXT_TABLE_SIZE = nextPrime(size+1);    // new size of array
+    int NEXT_TABLE_SIZE = nextPrime(2*size);    // new size of array
 
     string keys[size];        //to store old keys and values
     int values[size];
@@ -246,3 +261,9 @@ void HashTable::reHash()
     cout << "Rehashing ..." << endl;
     cout << " new size = " << NEXT_TABLE_SIZE << endl;
 }
+
+    // subscript operator
+    int operator[](const hashTable &)
+    {
+
+    }

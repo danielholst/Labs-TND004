@@ -263,7 +263,19 @@ void HashTable::reHash()
 }
 
     // subscript operator
-    int operator[](const hashTable &)
+    void HashTable::operator[](const string& s)
     {
+        int counter = 0;
 
+        if(!find(s))    // if s is not already in the hashtable
+            insert(s, 1);
+        else
+        {
+            counter = find(s);
+            remove(s);
+            counter++;
+            insert(s, counter);   //insert key again with new value
+        }
+
+        //return counter;
     }

@@ -116,6 +116,8 @@ public:
     // IMPLEMENT
     bool remove(string key);
 
+    // subscript operator
+    void operator[](const string &s);
 
     /** \brief Display all items in the table T
       *
@@ -172,9 +174,6 @@ private:
 
     //disable assignment operator
     const HashTable& operator=(const HashTable &);
-
-    // subscript operator
-    int operator[](const HashTable &);
 
 };
 

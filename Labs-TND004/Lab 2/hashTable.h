@@ -74,6 +74,11 @@ public:
         return nItems;
     }
 
+    //return number of unique items stored in the table
+    int get_number_of_unique_items() const
+    {
+        return nUniqueItems;
+    }
 
 
     /** \brief Search an item in the table
@@ -153,6 +158,8 @@ private:
     //number of items stored in the table
     int nItems; /**< number of items stored in the table */
 
+    //number of unique items stored in the table
+    int nUniqueItems;
 
     //Each slot of the table stores a pointer to an Item =(key, value)
     Item** hTable; /**< table is an array of pointers to Items */

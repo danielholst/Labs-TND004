@@ -37,7 +37,7 @@ int nextPrime( int n )
 // Constructor
 // IMPLEMENT
 HashTable::HashTable(int table_size, HASH f)
-    : size(nextPrime(table_size)), h(f), nItems(0)
+    : size(nextPrime(table_size)), h(f), nItems(0), nUniqueItems(0)
 {
     //create array (hTable) with pointers to items
     hTable = new Item*[size];
@@ -102,6 +102,7 @@ int HashTable::find(string key) const
 // IMPLEMENT
 void HashTable::insert(string key, int v)
 {
+
     int hashVal = h(key, size);
     Item* newItem = new Item(key, v);
 
@@ -109,6 +110,7 @@ void HashTable::insert(string key, int v)
     {
         hTable[hashVal] = newItem;
         nItems++;
+        nUniqueItems++;
     }
     else
     {
@@ -124,6 +126,7 @@ void HashTable::insert(string key, int v)
                 remove(key);
                 hTable[hashVal] = newItem;
                 break;
+                nUniqueItems--;
             }
             hashVal++;
 
@@ -222,6 +225,7 @@ ostream& operator<<(ostream& os, const HashTable& T)
 void HashTable::reHash()
 {
     nItems = 0;
+    nUniqueItems = 0;
     int NEXT_TABLE_SIZE = nextPrime(2*size);    // new size of array
 
     string keys[size];        //to store old keys and values
@@ -267,8 +271,15 @@ void HashTable::reHash()
     {
         int counter = 0;
 
-        if(!find(s))    // if s is not already in the hashtable
-            insert(s, 1);
+        int hashVal = h(s, size);
+
+        if(hTable[hashVal] == NULL)     // if empty -> insert
+        {
+            Item* newItem = new Item(key, 1);
+            hTable[hashVal] = newItem;
+            nItems++;
+            nUniqueItems++;
+        }
         else
         {
             counter = find(s);

@@ -1,7 +1,12 @@
 # depslib dependency file v1.0
-1429448151 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 2\freq_table_test.cpp
+1429637801 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 2\freq_table_test.cpp
 	<iostream>
 	<string>
+	<cstring>
+	<fstream>
+	<algorithm>
+	<iomanip>
+	<vector>
 	"hashTable.h"
 
 1429448016 c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 2\hashtable.h
@@ -14,9 +19,10 @@
 	<iomanip>
 	<new>
 
-1429447648 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 2\hashtable.cpp
+1429467624 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 2\hashtable.cpp
 	<assert.h>
 	<iomanip>
+	<iostream>
 	"hashTable.h"
 
 1428506890 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 2\item.cpp

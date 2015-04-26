@@ -1,5 +1,6 @@
 #include <assert.h>
 #include <iomanip>
+#include <iostream>
 
 #include "hashTable.h"
 
@@ -110,7 +111,8 @@ void HashTable::insert(string key, int v)
     {
         hTable[hashVal] = newItem;
         nItems++;
-        nUniqueItems++;
+        if(find(key) == 1)
+            nUniqueItems++;
     }
     else
     {
@@ -119,6 +121,8 @@ void HashTable::insert(string key, int v)
             if(hTable[hashVal]->value == -1)
             {
                 hTable[hashVal] = newItem;
+                nItems++;
+                nUniqueItems++;
                 break;
             }
             if(hTable[hashVal]->key == key)     // if key already exist in table remove old one and insert new to get new value
@@ -137,6 +141,7 @@ void HashTable::insert(string key, int v)
         }
         hTable[hashVal] = newItem;
         nItems++;
+        nUniqueItems++;
     }
 
     if (loadFactor() > MAX_LOAD_FACTOR)
@@ -164,6 +169,7 @@ bool HashTable::remove(string key)
                 hTable[hashVal] = delItem;
                 return true;
                 nItems--;
+                nUniqueItems--;
             }
             hashVal++;
             if( hashVal == (size))  // if in the last slot of array start from the top
@@ -210,9 +216,11 @@ void HashTable::display(ostream& os)
 // IMPLEMENT
 ostream& operator<<(ostream& os, const HashTable& T)
 {
-    for ( int i = 0; i < T.size; i++)
+    for(int i = 0; i < T.size; i++)
     {
-        os << T.hTable[i]->value << " ";
+        if(T.hTable[i] != NULL)
+            os << "key = " <<  T.hTable[i]->key << setw(20) << fixed << right
+               << "value = " << T.hTable[i]->value << endl;
     }
 
     return os;
@@ -275,18 +283,29 @@ void HashTable::reHash()
 
         if(hTable[hashVal] == NULL)     // if empty -> insert
         {
-            Item* newItem = new Item(key, 1);
-            hTable[hashVal] = newItem;
-            nItems++;
-            nUniqueItems++;
+            insert(s, 1);
         }
         else
         {
-            counter = find(s);
-            remove(s);
-            counter++;
-            insert(s, counter);   //insert key again with new value
-        }
+            while (hTable[hashVal] != NULL) //loop until empty slot in table
+            {
+                if(hTable[hashVal]->key == s)     // if key already exist in table remove old one and insert new to get new value
+                {
+                    counter = find(s)+1;
+                    remove(s);
+                    insert(s, counter);
+                    break;
+                }
+                hashVal++;
+
+                if( hashVal == size )  // if in the last slot of array start from the top
+                {
+                    hashVal = 0;
+                }
+                insert(s, 1);   //insert key again with new value
+
+            }
 
         //return counter;
+        }
     }

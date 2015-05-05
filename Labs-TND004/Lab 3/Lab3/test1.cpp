@@ -40,21 +40,21 @@ int main()
     *PHASE 1: insert()                                    *
     *         create the tree of slide 9, Fö 6            *
     *******************************************************/
-//    cout << "\**TEST PHASE 1: insert"
-//         << endl << endl;
-//
-//    string V[] = {"6", "4", "5", "8", "7", "2"};
-//
-//    for(int i = 0; i < 6; i++)
-//    {
-//        ELEMENT e(V[i],0);
-//        table.insert(e);
-//    }
-//
-//    cout << "Tree: ";
-//    table.display();
-//    cout << endl;
-//
+    cout << "\**TEST PHASE 1: insert"
+         << endl << endl;
+
+    string V[] = {"6", "4"}; ///, "5", "8", "7", "2"};
+
+    for(int i = 0; i < 2; i++)
+    {
+        ELEMENT e(V[i],0);
+        table.insert(e);
+    }
+
+    cout << "Tree: ";
+    table.display();
+    cout << endl;
+
 //    /******************************************************
 //    *PHASE 2: operator[], find(), iterators               *
 //    *******************************************************/

@@ -31,8 +31,53 @@ Node::~Node()
 //Otherwise, return false --v already exists in the tree
 bool Node::insert(ELEMENT v)
 {
-    //ADD CODE
-    return false;
+
+    if(v.first == this->value.first)    // increase word conter if this == value
+        this->value.second++;
+
+    else if(v.first > this->value.first)    // new value is larger then this value
+    {
+        if(this->left == nullptr)
+        {
+            //create new Node with new value
+            Node* tempNode = new Node(v, nullptr, nullptr);
+            tempNode->l_thread = tempNode->r_thread = true;
+            this->right = tempNode;
+            this->r_thread = false;
+            return true;
+        }
+
+        else if(this->right->value.first == v.first)     // v already exists in the tree
+        {
+            this->right->value.second++;
+            return false;
+        }
+        else
+            this->right->insert(v);
+    }
+
+    else if(v.first < this->value.first) // new value is smaller than value of this
+    {
+        if(this->left == nullptr)
+        {
+            //create new Node with new value
+            Node* tempNode = new Node(v, nullptr, nullptr);
+            tempNode->l_thread = tempNode->r_thread = true;
+            this->left = tempNode;
+            this->l_thread = false;
+            return true;
+        }
+
+        else if(this->left->value.first == v.first)     // v already exists in the tree
+        {
+            this->left->value.second++;
+            return false;
+        }
+        else
+            this->left->insert(v);
+
+    }
+
 }
 
 

@@ -20,10 +20,12 @@ using namespace std;
 BST_threaded::BST_threaded()
  : counter(0)
 {
-    //ADD CODE
+    ELEMENT tempElement;
+    tempElement.first = "";
+    tempElement.second = -1;
+    root = new Node(tempElement);   // pointer *l = *r = nullptr
+
 }
-
-
 //destructor
 BST_threaded::~BST_threaded()
 {
@@ -34,15 +36,16 @@ BST_threaded::~BST_threaded()
 //Test if the tree is empty
 bool BST_threaded::empty() const
 {
-    //ADD CODE
-    return true;
+    if(root->left == nullptr)
+        return true;
+    else
+        return false;
 }
 
 //Return mumber of keys (elements) stored in the tree
 int BST_threaded::size() const
 {
-   //ADD CODE
-    return 0;
+   return counter;
 }
 
 

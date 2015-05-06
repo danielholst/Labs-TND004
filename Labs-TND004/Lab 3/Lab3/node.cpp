@@ -41,12 +41,10 @@ bool Node::insert(ELEMENT v)
 
     else if(v.first > this->value.first)    // new value is larger then this value
     {
-        if(this->right == nullptr)
+        if(this->r_thread)
         {
-            //create new Node with new value
-            Node* tempNode = new Node(v, nullptr, nullptr);
-            tempNode->l_thread = tempNode->r_thread = true;
-            this->right = tempNode;
+            this->right = new Node(v, nullptr, nullptr);
+            this->right->l_thread = this->right->r_thread = true;
             this->r_thread = false;
             return true;
         }
@@ -57,17 +55,18 @@ bool Node::insert(ELEMENT v)
             return false;
         }
         else
+        {
             this->right->insert(v);
+        }
+
     }
 
     else if(v.first < this->value.first) // new value is smaller than value of this
     {
-        if(this->left == nullptr)
+        if(this->l_thread)
         {
-            //create new Node with new value
-            //Node* tempNode = new Node(v, nullptr, nullptr);
-            //tempNode->l_thread = tempNode->r_thread = true;
-            this->left =  new Node(v, nullptr, nullptr);
+            this->left = new Node(v, nullptr, nullptr);
+            this->left->l_thread = this->left->r_thread = true;
             this->l_thread = false;
             return true;
         }
@@ -78,7 +77,10 @@ bool Node::insert(ELEMENT v)
             return false;
         }
         else
+        {
             this->left->insert(v);
+        }
+
 
     }
 

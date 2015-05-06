@@ -43,9 +43,9 @@ int main()
     cout << "\**TEST PHASE 1: insert"
          << endl << endl;
 
-    string V[] = {"6", "4"}; ///, "5", "8", "7", "2"};
+    string V[] = {"6", "4", "5", "8", "7", "2"};
 
-    for(int i = 0; i < 2; i++)
+    for(int i = 0; i < 6; i++)
     {
         ELEMENT e(V[i],0);
         table.insert(e);
@@ -55,12 +55,12 @@ int main()
     table.display();
     cout << endl;
 
-//    /******************************************************
-//    *PHASE 2: operator[], find(), iterators               *
-//    *******************************************************/
-//    cout << "\n**TEST PHASE 2: operator[], find(), iterators"
-//         << endl << endl;
-//
+    /******************************************************
+    *PHASE 2: operator[], find(), iterators               *
+    *******************************************************/
+    cout << "\n**TEST PHASE 2: operator[], find(), iterators"
+         << endl << endl;
+
 //    for(int i = 0; i < 6; i++)
 //    {
 //       cout << table[V[i]].first << " "

@@ -33,11 +33,15 @@ bool Node::insert(ELEMENT v)
 {
 
     if(v.first == this->value.first)    // increase word conter if this == value
+    {
         this->value.second++;
+        return false;
+    }
+
 
     else if(v.first > this->value.first)    // new value is larger then this value
     {
-        if(this->left == nullptr)
+        if(this->right == nullptr)
         {
             //create new Node with new value
             Node* tempNode = new Node(v, nullptr, nullptr);
@@ -61,9 +65,9 @@ bool Node::insert(ELEMENT v)
         if(this->left == nullptr)
         {
             //create new Node with new value
-            Node* tempNode = new Node(v, nullptr, nullptr);
-            tempNode->l_thread = tempNode->r_thread = true;
-            this->left = tempNode;
+            //Node* tempNode = new Node(v, nullptr, nullptr);
+            //tempNode->l_thread = tempNode->r_thread = true;
+            this->left =  new Node(v, nullptr, nullptr);
             this->l_thread = false;
             return true;
         }

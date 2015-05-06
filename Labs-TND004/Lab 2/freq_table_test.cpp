@@ -57,7 +57,7 @@ int main()
     HashTable freq_table(TABLE_SIZE, my_hash);
 
     fstream myfile;
-    myfile.open ("test_file2.txt");
+    myfile.open ("test_file1.txt");
 
 		while (myfile >> word)
 		{

@@ -92,8 +92,22 @@ ELEMENT& BST_threaded::operator[](string key)
 //Otherwise, return this->end().
 BiIterator BST_threaded::find(string key) const
 {
-    //ADD CODE
-    return end();
+    Node* tempNode;
+    if(empty())
+        return end();
+    else
+    {
+        tempNode = root->left->find(key);
+    }
+
+    if(tempNode == nullptr)
+        return end();
+    else
+    {
+        BiIterator tempIterator(tempNode);
+        return tempIterator;
+    }
+
 }
 
 

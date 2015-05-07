@@ -123,7 +123,27 @@ void Node::removeMe(Node* parent, bool isRight)
 //If there is no node storing key then return nullptr
 Node* Node::find(string key)
 {
-    //ADD CODE
+    Node* tempNode = this;
+    if(tempNode->value.first == key);
+        return tempNode;
+        else if(key < tempNode->value.first) // new value is smaller than value of this
+    {
+        if(tempNode->l_thread)
+        {
+            return nullptr;
+        }
+
+        else if(tempNode->left->value.first == key)     // v already exists in the tree
+        {
+            return tempNode->left;
+        }
+        else
+        {
+            this->left->find(key);
+        }
+
+
+    }
     return nullptr;
 }
 

@@ -60,13 +60,13 @@ int main()
     *******************************************************/
     cout << "\n**TEST PHASE 2: operator[], find(), iterators"
          << endl << endl;
-
+    cout << table[V[1]].first << endl;
 //    for(int i = 0; i < 6; i++)
 //    {
 //       cout << table[V[i]].first << " "
 //            << table[V[i]].second << endl;
 //    }
-//
+
 //    table["5"].second++;
 //    cout << endl << table["5"].first << " "
 //            << table["5"].second << endl;
@@ -80,16 +80,16 @@ int main()
 //         << table["100"].second << ")" << " has been inserted in the table" << endl;
 //
 //
-//   /******************************************************
-//   *PHASE 3: iterators                                   *
-//   *******************************************************/
-//    cout << "\n**TEST PHASE 3: iterators up and down"
-//         << endl << endl;
-//
-//    cout << "\n\nTable sorted increasingly..."
-//         << endl << endl;
-//
-//    BiIterator it = table.begin();
+   /******************************************************
+   *PHASE 3: iterators                                   *
+   *******************************************************/
+    cout << "\n**TEST PHASE 3: iterators up and down"
+         << endl << endl;
+
+    cout << "\n\nTable sorted increasingly..."
+         << endl << endl;
+
+    BiIterator it = table.begin();
 //
 //    cout << "  \tKEY" << "\tCOUNTER" << endl;
 //    cout << "==============================\n";

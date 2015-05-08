@@ -80,10 +80,7 @@ bool Node::insert(ELEMENT v)
         {
             this->left->insert(v);
         }
-
-
     }
-
 }
 
 
@@ -124,25 +121,40 @@ void Node::removeMe(Node* parent, bool isRight)
 Node* Node::find(string key)
 {
     Node* tempNode = this;
-    if(tempNode->value.first == key);
+    if(tempNode->value.first == key)
         return tempNode;
-        else if(key < tempNode->value.first) // new value is smaller than value of this
+
+    else if(key > tempNode->value.first) // new value is bigger than value of this
+    {
+        if(tempNode->r_thread)
+        {
+            return nullptr;
+        }
+
+//        else if(tempNode->right->value.first == key)     // v already exists in the tree
+//        {
+//            return tempNode->right;
+//        }
+        else
+        {
+            this->right->find(key);
+        }
+    }
+    else //(key < tempNode->value.first) // new value is smaller than value of this
     {
         if(tempNode->l_thread)
         {
             return nullptr;
         }
 
-        else if(tempNode->left->value.first == key)     // v already exists in the tree
-        {
-            return tempNode->left;
-        }
+//        else if(tempNode->left->value.first == key)     // v already exists in the tree
+//        {
+//            return tempNode->left;
+//        }
         else
         {
             this->left->find(key);
         }
-
-
     }
     return nullptr;
 }

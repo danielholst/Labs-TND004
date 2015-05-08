@@ -80,10 +80,24 @@ void BST_threaded::remove(string key)
 //then an ELEMENT (key,0) is inserted and a reference to it is returned
 ELEMENT& BST_threaded::operator[](string key)
 {
-    //ADD CODE
-    static ELEMENT e("", 0); //MUST remove this code
+    Node* tempNode;
 
-    return e; //MUST remove this code
+    if(root->left->find(key) != nullptr)
+    {
+        tempNode = root->left->find(key);
+        return tempNode->value;
+    }
+    else
+    {
+        ELEMENT tempElement;
+        tempElement.first = key;
+        tempElement.second = 0;
+        root->left->insert(tempElement);
+        tempNode = root->left->find(key);
+        return tempNode->value;
+    }
+
+
 }
 
 
@@ -114,8 +128,18 @@ BiIterator BST_threaded::find(string key) const
 //Return an iterator referring to the first node in the inorder traversal of the BST
 BiIterator BST_threaded::begin() const
 {
-    //ADD CODE
-    return end();
+    if(empty())
+        return end();
+    else
+    {
+        Node* tempNode = root;
+        while (tempNode->left != nullptr)   // goes to the smallest node , at the bottom left
+        {
+            tempNode = tempNode->left;
+        }
+
+        return BiIterator(tempNode);
+    }
 }
 
 

@@ -146,7 +146,7 @@ BiIterator BST_threaded::begin() const
  //Return a BiIterator referring to the past-the-end element in the BST
 BiIterator BST_threaded::end() const
 {
-    BiIterator it(root);
+    BiIterator it(nullptr);
 
     return it;
 }

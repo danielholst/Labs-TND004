@@ -31,54 +31,54 @@ Node::~Node()
 //Otherwise, return false --v already exists in the tree
 bool Node::insert(ELEMENT v)
 {
-
-    if(v.first == this->value.first)    // increase word conter if this == value
+    Node* tempNode = this;
+    if(v.first == tempNode->value.first)    // increase word conter if this == value
     {
         this->value.second++;
         return false;
     }
 
 
-    else if(v.first > this->value.first)    // new value is larger then this value
+    else if(v.first > tempNode->value.first)    // new value is larger then this value
     {
-        if(this->r_thread)
+        if(tempNode->r_thread)
         {
-            this->right = new Node(v, nullptr, nullptr);
-            this->right->l_thread = this->right->r_thread = true;
-            this->r_thread = false;
+            tempNode->right = new Node(v, nullptr, nullptr);
+            tempNode->right->l_thread = tempNode->right->r_thread = true;
+            tempNode->r_thread = false;
             return true;
         }
 
-        else if(this->right->value.first == v.first)     // v already exists in the tree
+        else if(tempNode->right->value.first == v.first)     // v already exists in the tree
         {
-            this->right->value.second++;
+            tempNode->right->value.second++;
             return false;
         }
         else
         {
-            this->right->insert(v);
+            tempNode->right->insert(v);
         }
 
     }
 
-    else if(v.first < this->value.first) // new value is smaller than value of this
+    else if(v.first < tempNode->value.first) // new value is smaller than value of this
     {
-        if(this->l_thread)
+        if(tempNode->l_thread)
         {
-            this->left = new Node(v, nullptr, nullptr);
-            this->left->l_thread = this->left->r_thread = true;
-            this->l_thread = false;
+            tempNode->left = new Node(v, nullptr, nullptr);
+            tempNode->left->l_thread = tempNode->left->r_thread = true;
+            tempNode->l_thread = false;
             return true;
         }
 
-        else if(this->left->value.first == v.first)     // v already exists in the tree
+        else if(tempNode->left->value.first == v.first)     // v already exists in the tree
         {
-            this->left->value.second++;
+            tempNode->left->value.second++;
             return false;
         }
         else
         {
-            this->left->insert(v);
+            tempNode->left->insert(v);
         }
     }
 }
@@ -121,43 +121,29 @@ void Node::removeMe(Node* parent, bool isRight)
 Node* Node::find(string key)
 {
     Node* tempNode = this;
-    if(tempNode->value.first == key)
-        return tempNode;
 
-    else if(key > tempNode->value.first) // new value is bigger than value of this
+    while (tempNode)
     {
-        if(tempNode->r_thread)
+        if(key > tempNode->value.first)
         {
-            return nullptr;
+            if(tempNode->r_thread)
+                break;
+            tempNode = tempNode->right;
         }
 
-//        else if(tempNode->right->value.first == key)     // v already exists in the tree
-//        {
-//            return tempNode->right;
-//        }
-        else
+        else if( key < tempNode->value.first)
         {
-            this->right->find(key);
-        }
-    }
-    else //(key < tempNode->value.first) // new value is smaller than value of this
-    {
-        if(tempNode->l_thread)
-        {
-            return nullptr;
+            if(tempNode->l_thread)
+                break;
+            tempNode = tempNode->left;
         }
 
-//        else if(tempNode->left->value.first == key)     // v already exists in the tree
-//        {
-//            return tempNode->left;
-//        }
-        else
-        {
-            this->left->find(key);
-        }
+        else    // same value
+            return tempNode;
     }
+
     return nullptr;
-}
+    }
 
 
 //Return a pointer to the node storing the smalest value

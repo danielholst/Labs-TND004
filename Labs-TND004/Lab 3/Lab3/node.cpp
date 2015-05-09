@@ -150,8 +150,12 @@ Node* Node::find(string key)
 //of the tree whose root is this node
 Node* Node::findMin()
 {
-    //ADD CODE
-    return nullptr;
+    Node* tempNode = this;
+
+    while(tempNode)
+        tempNode = tempNode->left;
+
+    return tempNode;
 }
 
 
@@ -159,8 +163,12 @@ Node* Node::findMin()
 //of the tree whose root is this node
 Node* Node::findMax()
 {
-    //ADD CODE
-    return nullptr;
+    Node* tempNode = this;
+
+    while(tempNode)
+        tempNode = tempNode->right;
+
+    return tempNode;
 }
 
 

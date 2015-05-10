@@ -71,9 +71,10 @@ int main()
     cout << endl << table["5"].first << " "
          << table["5"].second << endl;
 
+   // cout << table.end()->current->value.first << endl;
 
-   if (table.find("20") == table.end())
-    cout << "20 is not in the tree" << endl;
+//   if (table.find("20") == table.end())
+//    cout << "20 is not in the tree" << endl;
 
     //Insert (100,0) in the table
     cout << "(" << table["100"].first << ","
@@ -89,27 +90,27 @@ int main()
          << endl << endl;
 
     BiIterator it = table.begin();
-//
-//    cout << "  \tKEY" << "\tCOUNTER" << endl;
-//    cout << "==============================\n";
-//    for( ; it != table.end(); it++)
-//    {
-//         cout << setw(10) << it->first
-//              << setw(12) << it->second << endl;
-//    }
-//
-//    cout << "\n\nTable sorted decreasingly..." << endl << endl;
-//
-//    it = table.find("8");
-//
-//    cout << "  \tKEY" << "\tCOUNTER" << endl;
-//    cout << "==============================\n";
-//    for( ; it != table.end(); it--)
-//    {
-//         cout << setw(10) << it->first
-//              << setw(12) << it->second << endl;
-//    }
-//
+
+    cout << "  \tKEY" << "\tCOUNTER" << endl;
+    cout << "==============================\n";
+    for( ; it != table.end(); it++)
+    {
+         cout << setw(10) << it->first
+              << setw(12) << it->second << endl;
+    }
+
+    cout << "\n\nTable sorted decreasingly..." << endl << endl;
+
+    it = table.find("8");
+
+    cout << "  \tKEY" << "\tCOUNTER" << endl;
+    cout << "==============================\n";
+    for( ; it != table.end(); it--)
+    {
+         cout << setw(10) << it->first
+              << setw(12) << it->second << endl;
+    }
+
 //   /******************************************************
 //   *PHASE 4: remove                                      *
 //   *******************************************************/

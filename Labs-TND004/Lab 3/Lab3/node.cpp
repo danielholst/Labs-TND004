@@ -43,7 +43,7 @@ bool Node::insert(ELEMENT v)
     {
         if(tempNode->r_thread)
         {
-            tempNode->right = new Node(v, nullptr, nullptr);
+            tempNode->right = new Node(v, tempNode, tempNode->right);
             tempNode->right->l_thread = tempNode->right->r_thread = true;
             tempNode->r_thread = false;
             return true;
@@ -65,7 +65,7 @@ bool Node::insert(ELEMENT v)
     {
         if(tempNode->l_thread)
         {
-            tempNode->left = new Node(v, nullptr, nullptr);
+            tempNode->left = new Node(v, tempNode->left, tempNode);
             tempNode->left->l_thread = tempNode->left->r_thread = true;
             tempNode->l_thread = false;
             return true;
@@ -143,7 +143,7 @@ Node* Node::find(string key)
     }
 
     return nullptr;
-    }
+}
 
 
 //Return a pointer to the node storing the smalest value

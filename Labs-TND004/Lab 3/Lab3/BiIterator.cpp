@@ -25,38 +25,42 @@ BiIterator::BiIterator(Node *ptr)
 //Dereferencing operator
 ELEMENT& BiIterator::operator*() const
 {
-    //ADD CODE
+    return current->value;
 }
 
 
 //Member access operator
 ELEMENT* BiIterator::operator->() const
 {
-    //ADD CODE
-    return nullptr;
+    return &current->value;
 }
 
 
 //Equality comparison operator
 bool BiIterator::operator==(const BiIterator &it) const
 {
-    //ADD CODE
-    return false;
+    if((current->value.first == it.current->value.first))
+        return true;
+    else
+        return false;
 }
 
 
 //Inequality comparison operator
 bool BiIterator::operator!=(const BiIterator &it) const
 {
-   //ADD CODE
-    return false;
+    if((current->value.first != it.current->value.first))
+        return true;
+    else
+        return false;
 }
 
 
 //Pre increment operator
 BiIterator& BiIterator::operator++()
 {
-   //ADD CODE
+    current = current->right;
+
     return *this;
 }
 
@@ -65,22 +69,27 @@ BiIterator& BiIterator::operator++()
 //Pos increment operator: see page 277 and 278 of C++ direkt
 BiIterator BiIterator::operator++(int)
 {
-   //ADD CODE
-    return *this;
+    BiIterator biIt(this->current);
+    current = current->right;
+
+    return biIt;
 }
 
 //Pre decrement operator
 BiIterator& BiIterator::operator--()
 {
-   //ADD CODE
+    current = current->right;
+
     return *this;
 }
 
 //Pos decrement operator
 BiIterator BiIterator::operator--(int)
 {
-   //ADD CODE
-    return *this;
+    BiIterator biIt(this->current);
+    current = current->left;
+
+    return biIt;
 }
 
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */

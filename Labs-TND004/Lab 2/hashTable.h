@@ -122,7 +122,7 @@ public:
     bool remove(string key);
 
     // subscript operator
-    int operator[](const string &s);
+    int& operator[](const string s);
 
     /** \brief Display all items in the table T
       *

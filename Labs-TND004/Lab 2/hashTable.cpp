@@ -44,7 +44,7 @@ HashTable::HashTable(int table_size, HASH f)
     hTable = new Item*[size];
     for(int i = 0; i < size; i++)
     {
-        hTable[i] = NULL;
+        hTable[i] = nullptr;
     }
 
 }
@@ -56,7 +56,7 @@ HashTable::~HashTable()
 {
     for (int i = 0; i < size; i++)
     {
-        if (hTable[i] != NULL)
+        if (hTable[i] != nullptr)
             delete hTable[i];
     }
     delete[] hTable;
@@ -76,11 +76,11 @@ double HashTable::loadFactor() const
 int HashTable::find(string key) const
 {
     int hashVal = h(key, size);
-    if(hTable[hashVal] == NULL)
+    if(hTable[hashVal] == nullptr)
         return NOT_FOUND;
     else
     {
-        while (hTable[hashVal] != NULL)   //loop until empty slot in table
+        while (hTable[hashVal] != nullptr)   //loop until empty slot in table
         {
             if(hTable[hashVal]->key == key)
                 return hTable[hashVal]->value;
@@ -107,7 +107,7 @@ void HashTable::insert(string key, int v)
     int hashVal = h(key, size);
     Item* newItem = new Item(key, v);
 
-    if(hTable[hashVal] == NULL)     // if empty -> insert
+    if(hTable[hashVal] == nullptr)     // if empty -> insert
     {
         hTable[hashVal] = newItem;
         nItems++;
@@ -115,7 +115,7 @@ void HashTable::insert(string key, int v)
     }
     else
     {
-        while (hTable[hashVal] != NULL) //loop until empty slot in table
+        while (hTable[hashVal] != nullptr) //loop until empty slot in table
         {
             if(hTable[hashVal]->value == -1 && (find(key) == NOT_FOUND))
             {
@@ -126,8 +126,8 @@ void HashTable::insert(string key, int v)
             }
             if(hTable[hashVal]->key == key)     // if key already exist in table remove old one and insert new to get new value
             {
-                remove(key);
-                hTable[hashVal] = newItem;
+                hTable[hashVal]->value++;
+                nItems++;
                 nUniqueItems--;
                 break;
             }
@@ -160,14 +160,14 @@ bool HashTable::remove(string key)
     else
     {
         int hashVal = h(key, size);
-        while (hTable[hashVal] != NULL )   // loop to find key
+        while (hTable[hashVal] != nullptr )   // loop to find key
         {
             if(hTable[hashVal]->key == key)
             {
-                Item* delItem = new Item("", -1);   // Deleted item
-                hTable[hashVal] = delItem;
+                if(hTable[hashVal]->value == 1)
+                    nUniqueItems--;
+                hTable[hashVal] = Deleted_Item::get_Item();
                 nItems--;
-                nUniqueItems--;
                 return true;
             }
             hashVal++;
@@ -217,8 +217,8 @@ ostream& operator<<(ostream& os, const HashTable& T)
 {
     for(int i = 0; i < T.size; i++)
     {
-        if(T.hTable[i] != NULL)
-            os << "key = " <<  T.hTable[i]->key << setw(30) << fixed << right
+        if(T.hTable[i] != nullptr)
+            os << "key = " << left << setw(20) << T.hTable[i]->key
                << "value = " << T.hTable[i]->value << endl;
     }
 
@@ -240,7 +240,7 @@ void HashTable::reHash()
 
     for(int i = 0; i < size; i++)       //loop through old array and store all values in new arrays
     {
-        if(hTable[i] != NULL)
+        if(hTable[i] != nullptr)
         {
             keys[i] = hTable[i]->key;
             values[i] = hTable[i]->value;
@@ -258,7 +258,7 @@ void HashTable::reHash()
     hTable = new Item*[size];   // make hTable to the new size
     for(int i = 0; i < size; i++)
     {
-        hTable[i] = NULL;
+        hTable[i] = nullptr;
     }
 
     for( int i = 0; i < prevSize; i++)  // insert values to hTable again
@@ -277,59 +277,12 @@ void HashTable::reHash()
 int& HashTable::operator[](const string s)
 {
     if((find(s)) == NOT_FOUND)
-        insert(s,0);
+        insert(s,1);
+    else
+         insert(s, (find(s)+1));
 
     int hashVal = h(s, size);
-    cout << hashVal << endl;
 
-    while (hTable[hashVal]->key != s) //loop until searched key
-    {
-        if( hashVal == size )  // if in the last slot of array start from the top
-        {
-            hashVal = 0;
-        }
-        hashVal++;
-    }
-
-    hTable[hashVal]->value++;
+    //hTable[hashVal]->value++;
     return hTable[hashVal]->value;
 }
-
-//    // subscript operator
-//    int HashTable::operator[](const string &s)
-//    {
-//        int counter = 0;
-//
-//        int hashVal = h(s, size);
-//
-//        if(hTable[hashVal] == NULL)     // if empty -> insert
-//        {
-//            insert(s, 1);
-//            return 1;
-//        }
-//        else
-//        {
-//            while (hTable[hashVal] != NULL) //loop until empty slot in table
-//            {
-//                if( hashVal == size )  // if in the last slot of array start from the top
-//                {
-//                    hashVal = 0;
-//                }
-//
-//                if(hTable[hashVal]->key == s)     // if key already exist in table remove old one and insert new to get new value
-//                 {
-//                    counter = hTable[hashVal]->value+1;
-//                    remove(s);
-//                    nItems++;
-//                    insert(s, counter);
-//                    return counter;
-//                }
-//                hashVal++;
-//            }
-//
-//            insert(s, 1);
-//            return 1;
-//
-//        //return counter;
-//        }
-//    }

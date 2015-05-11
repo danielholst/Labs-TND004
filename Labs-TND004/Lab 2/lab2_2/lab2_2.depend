@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1431010519 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 2\freq_table_test.cpp
+1431010984 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 2\freq_table_test.cpp
 	<iostream>
 	<string>
 	<cstring>
@@ -9,7 +9,7 @@
 	<vector>
 	"hashTable.h"
 
-1430894907 c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 2\hashtable.h
+1431326336 c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 2\hashtable.h
 	"item.h"
 	<iostream>
 

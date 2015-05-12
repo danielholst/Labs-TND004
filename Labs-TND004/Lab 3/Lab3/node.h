@@ -86,7 +86,11 @@ private:
     //IMPLEMENT
     bool insert(ELEMENT v);
 
+    //find the parent node
+    Node* findParentNode(Node* childNode, Node* firstNode);
 
+    //finds the next node in order, for threading
+    Node* findNextNode(string newValue, Node* firstNode);
     /** \brief Remove the node storing key from the tree T, where T is the sub-tree with root this node.
     *
     * \param key string representing the value to be searched in T.

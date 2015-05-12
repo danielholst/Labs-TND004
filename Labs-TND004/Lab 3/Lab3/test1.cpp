@@ -69,12 +69,12 @@ int main()
 
     table["5"].second++;
     cout << endl << table["5"].first << " "
-         << table["5"].second << endl;
+         << table["5"].second << endl << endl;
 
    // cout << table.end()->current->value.first << endl;
 
-//   if (table.find("20") == table.end())
-//    cout << "20 is not in the tree" << endl;
+   if (table.find("20") == table.end())
+    cout << "20 is not in the tree" << endl << endl;
 
     //Insert (100,0) in the table
     cout << "(" << table["100"].first << ","
@@ -111,11 +111,11 @@ int main()
               << setw(12) << it->second << endl;
     }
 
-//   /******************************************************
-//   *PHASE 4: remove                                      *
-//   *******************************************************/
-//    cout << "\n**TEST PHASE 4: remove" << endl << endl;
-//
+   /******************************************************
+   *PHASE 4: remove                                      *
+   *******************************************************/
+    cout << "\n**TEST PHASE 4: remove" << endl << endl;
+
 //    table.remove("6");
 //    table.remove("5");
 //    table.remove("7");

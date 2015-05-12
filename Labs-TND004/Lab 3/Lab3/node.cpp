@@ -34,7 +34,7 @@ bool Node::insert(ELEMENT v)
     Node* tempNode = this;
     if(v.first == tempNode->value.first)    // increase word conter if this == value
     {
-        this->value.second++;
+        tempNode->value.second++;
         return false;
     }
 
@@ -43,21 +43,14 @@ bool Node::insert(ELEMENT v)
     {
         if(tempNode->r_thread)
         {
-            tempNode->right = new Node(v, tempNode, tempNode->right);
-            tempNode->right->l_thread = tempNode->right->r_thread = true;
+            Node* newNode = new Node(v, tempNode, tempNode->right);
+            tempNode->right = newNode;
+            newNode->l_thread = newNode->r_thread = true;
             tempNode->r_thread = false;
-            return true;
         }
 
-        else if(tempNode->right->value.first == v.first)     // v already exists in the tree
-        {
-            tempNode->right->value.second++;
-            return false;
-        }
         else
-        {
-            tempNode->right->insert(v);
-        }
+            return tempNode->right->insert(v);
 
     }
 
@@ -65,22 +58,18 @@ bool Node::insert(ELEMENT v)
     {
         if(tempNode->l_thread)
         {
-            tempNode->left = new Node(v, tempNode->left, tempNode);
-            tempNode->left->l_thread = tempNode->left->r_thread = true;
+            Node* newNode = new Node(v, tempNode->left, tempNode);
+            tempNode->left = newNode;
+            newNode->l_thread = newNode->r_thread = true;
             tempNode->l_thread = false;
-            return true;
         }
 
-        else if(tempNode->left->value.first == v.first)     // v already exists in the tree
-        {
-            tempNode->left->value.second++;
-            return false;
-        }
         else
-        {
-            tempNode->left->insert(v);
-        }
+            return tempNode->left->insert(v);
+
     }
+
+    return true;
 }
 
 
@@ -152,7 +141,7 @@ Node* Node::findMin()
 {
     Node* tempNode = this;
 
-    while(tempNode)
+    while(!(tempNode->l_thread))
         tempNode = tempNode->left;
 
     return tempNode;
@@ -165,7 +154,7 @@ Node* Node::findMax()
 {
     Node* tempNode = this;
 
-    while(tempNode)
+    while(!(tempNode->r_thread))
         tempNode = tempNode->right;
 
     return tempNode;

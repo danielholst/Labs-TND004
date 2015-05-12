@@ -23,7 +23,7 @@ BST_threaded::BST_threaded()
     ELEMENT tempElement;
     tempElement.first = "";
     tempElement.second = -1;
-    root = new Node(tempElement);   // pointer *l = *r = nullptr
+    root = new Node(tempElement, nullptr, nullptr);   // pointer *l = *r = nullptr
 
 }
 //destructor
@@ -31,7 +31,6 @@ BST_threaded::~BST_threaded()
 {
   //ADD CODE
 }
-
 
 //Test if the tree is empty
 bool BST_threaded::empty() const
@@ -112,12 +111,18 @@ BiIterator BST_threaded::find(string key) const
     Node* tempNode;
 
     if(empty())
-        return end();
+        return this->end();
     else
     {
         tempNode = root->left->find(key);
-        BiIterator tempIterator(tempNode);
-        return tempIterator;
+        if(tempNode == nullptr)
+            return this->end();
+        else
+        {
+            BiIterator tempIterator(tempNode);
+            return tempIterator;
+        }
+
     }
 }
 
@@ -126,15 +131,15 @@ BiIterator BST_threaded::find(string key) const
 BiIterator BST_threaded::begin() const
 {
     if(empty())
-        return end();
+        return BiIterator(root);
     else
     {
-        Node* tempNode = root;
-        while (tempNode->left != nullptr)   // goes to the smallest node , at the bottom left
+        Node* tempNode = root->left;
+        while (!(tempNode->l_thread))   // goes to the smallest node , at the bottom left
         {
             tempNode = tempNode->left;
         }
-
+        cout << tempNode->value.first << endl;
         return BiIterator(tempNode);
     }
 }
@@ -143,7 +148,7 @@ BiIterator BST_threaded::begin() const
  //Return a BiIterator referring to the past-the-end element in the BST
 BiIterator BST_threaded::end() const
 {
-    BiIterator it(nullptr);
+    BiIterator it(root);
 
     return it;
 }

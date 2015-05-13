@@ -1,6 +1,6 @@
 /********************************************************
 * File: threaded_BST.cpp                                *
-* Author: Aida Nordman                                  *
+* Author: Daniel Holst                                  *
 * Course: TND004, Lab 3                                 *
 * Date: VT2, 2014                                       *
 * Description: class BST_threaded representing          *
@@ -69,8 +69,8 @@ void BST_threaded::insert(ELEMENT v)
 void BST_threaded::remove(string key)
 {
     //if key exists in tree, remove it. else do nothing
-   if (find(key))
-        counter -= root->left->remove(key);
+   if (root->left->find(key) != nullptr)
+        counter -= root->left->remove(key,root, false);
 }
 
 

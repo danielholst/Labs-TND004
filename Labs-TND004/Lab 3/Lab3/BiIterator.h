@@ -1,6 +1,6 @@
 /**********************************************
 * File: BiIterator.h                          *
-* Author: Aida Nordman                        *
+* Author: Daniel Holst                        *
 * Course: TND004, Lab 2                       *
 * Date: VT2, 2014                             *
 * Description: class biIterator               *

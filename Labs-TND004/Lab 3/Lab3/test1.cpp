@@ -1,6 +1,6 @@
 /**********************************************
 * File: test1.cpp                             *
-* Author: Aida Nordman                        *
+* Author: Daniel Holst                        *
 * Course: TND004, Lab 3                       *
 * Date: VT2, 2015                             *
 * Description: test program                   *

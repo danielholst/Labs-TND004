@@ -1,6 +1,6 @@
 /**********************************************
 * File: node.cpp                              *
-* Author: Aida Nordman                        *
+* Author: Daniel Holst                       *
 * Course: TND004, Lab 3                       *
 * Date: VT2, 2014                             *
 * Description: class Node                     *

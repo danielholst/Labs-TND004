@@ -81,8 +81,23 @@ bool Node::insert(ELEMENT v)
 //isRight==true: this node is right child of parent
 bool Node::remove(string key, Node* parent, bool isRight)
 {
-    //ADD CODE
-    return false;
+    Node* childNode = this;
+    Node* parentNode = parent;
+
+    while(childNode->value.first != key)
+    {
+        parentNode = childNode;
+        if(key < childNode->value.first)
+            childNode = childNode->left;
+        else
+            childNode = childNode->right;
+    }
+
+    if(parentNode->value.first > childNode->value.first)
+        removeMe(parentNode, false);
+    else
+        removeMe(parentNode, true);
+
 }
 
 
@@ -99,7 +114,18 @@ bool Node::remove(string key, Node* parent, bool isRight)
 //2c: a right child with no children
 void Node::removeMe(Node* parent, bool isRight)
 {
-   //ADD CODE
+    Node* tempNode1 = this;
+    Node* tempNode2 = this;
+    //if childNode has two childs
+//    if(!childNode->l_thread && !childNode->r_thread)
+//    {
+//        //find largest value in left tree
+//        tempNode1->left->findMax());
+//        tempNode2 = tempNode1;
+//        childNode = tempNode2;
+//        childNode->left=
+//    }
+
 }
 
 

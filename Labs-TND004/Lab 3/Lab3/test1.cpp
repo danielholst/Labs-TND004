@@ -78,13 +78,13 @@ int main()
 
     //Insert (100,0) in the table
     cout << "(" << table["100"].first << ","
-         << table["100"].second << ")" << " has been inserted in the table" << endl;
+         << table["100"].second << ")" << " has been inserted in the table" << endl << endl;
 
    /******************************************************
    *PHASE 3: iterators                                   *
    *******************************************************/
     cout << "\n**TEST PHASE 3: iterators up and down"
-         << endl << endl;
+         << endl;
 
     cout << "\n\nTable sorted increasingly..."
          << endl << endl;
@@ -116,23 +116,23 @@ int main()
    *******************************************************/
     cout << "\n**TEST PHASE 4: remove" << endl << endl;
 
-//    table.remove("6");
-//    table.remove("5");
-//    table.remove("7");
-//
-//    cout << "\n\nTable sorted increasingly after removing 5, 6, and 7..."
-//         << endl << endl;
-//
-//    it = table.begin();
-//
-//    cout << "  \tKEY" << "\tCOUNTER" << endl;
-//    cout << "==============================\n";
-//    for( ; it != table.end(); it++)
-//    {
-//         cout << setw(10) << it->first
-//              << setw(12) << it->second << endl;
-//    }
-//
+    table.remove("6");
+    table.remove("5");
+    table.remove("7");
+
+    cout << "\n\nTable sorted increasingly after removing 5, 6, and 7..."
+         << endl << endl;
+
+    it = table.begin();
+
+    cout << "  \tKEY" << "\tCOUNTER" << endl;
+    cout << "==============================\n";
+    for( ; it != table.end(); it++)
+    {
+         cout << setw(10) << it->first
+              << setw(12) << it->second << endl;
+    }
+
 //    cout << "\nRemove all ..." << endl;
 //
 //    table.remove("2");

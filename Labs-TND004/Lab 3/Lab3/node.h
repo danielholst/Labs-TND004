@@ -107,7 +107,7 @@ private:
     //IMPLEMENT
     bool remove(string key, Node* parent, bool isRight);
 
-
+    void reThread(Node* parent, Node* child, bool isRight);
 
     /** \brief Remove this Node.
     *

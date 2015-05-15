@@ -98,9 +98,24 @@ bool Node::remove(string key, Node* parent, bool isRight)
     else
         removeMe(parentNode, true);
 
+    return true;
+
 }
 
-
+//re-thread the parentNode
+void Node::reThread(Node* parentNode, Node* childNode, bool isRight)
+{
+    if(isRight)
+    {
+        parentNode->right = childNode->right;
+        parentNode->r_thread = childNode->r_thread;
+    }
+    else
+    {
+        parentNode->l_thread = childNode->l_thread;
+        parentNode->left = childNode->left;
+    }
+}
 
 //Remove this node -- this node has at most one child
 //isRight==false: this node is left child of parent
@@ -112,19 +127,55 @@ bool Node::remove(string key, Node* parent, bool isRight)
 //2a: a right child with only a right child
 //2b: a right child with only a left child
 //2c: a right child with no children
+//3   a child with two children
 void Node::removeMe(Node* parent, bool isRight)
 {
-    Node* tempNode1 = this;
-    Node* tempNode2 = this;
-    //if childNode has two childs
-//    if(!childNode->l_thread && !childNode->r_thread)
-//    {
-//        //find largest value in left tree
-//        tempNode1->left->findMax());
-//        tempNode2 = tempNode1;
-//        childNode = tempNode2;
-//        childNode->left=
-//    }
+    Node* childNode;
+    Node* parentNode = parent;
+    Node* tempNode;
+    string tempValue;
+    cout << "hej" << endl;
+    if(isRight)
+        childNode = parentNode->right;
+    else
+        childNode = parentNode->left;
+
+    //if childNode has no childs (case 1c and 2c)
+    if(childNode->l_thread && childNode->r_thread)
+    {
+        //rethread
+        reThread(parentNode, childNode, isRight);
+
+        //delete childNode
+        delete childNode;
+    }
+
+    //if childNode has two childs   (case 3)
+    if((!childNode->l_thread) && (!childNode->r_thread))
+    {
+        cout << "hej" << endl;
+        tempNode = childNode;
+
+        //find largest value in left tree
+        parentNode = childNode;
+        childNode = childNode->left;
+        while(!childNode->r_thread)
+        {
+            parentNode = childNode;
+            childNode = childNode->right;
+        }
+
+        //replace value
+        tempValue = tempNode->value.first;
+        cout << tempValue << endl;
+        tempNode->value = childNode->value;
+        childNode->value.first = tempValue;
+
+        reThread(parentNode, childNode, true);
+
+        delete childNode;
+
+    }
 
 }
 

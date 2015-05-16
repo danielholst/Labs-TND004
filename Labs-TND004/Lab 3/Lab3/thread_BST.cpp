@@ -35,10 +35,13 @@ BST_threaded::~BST_threaded()
 //Test if the tree is empty
 bool BST_threaded::empty() const
 {
-    if(root->left == nullptr)
+    if(!root->left)
         return true;
     else
+    {
         return false;
+    }
+
 }
 
 //Return mumber of keys (elements) stored in the tree

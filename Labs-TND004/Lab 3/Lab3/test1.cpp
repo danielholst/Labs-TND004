@@ -119,6 +119,10 @@ int main()
     table.remove("6");
     table.remove("5");
     table.remove("7");
+    table.remove("2");
+    table.remove("4");
+    table.remove("8");
+    table.remove("100");
 
     cout << "\n\nTable sorted increasingly after removing 5, 6, and 7..."
          << endl << endl;
@@ -133,15 +137,15 @@ int main()
               << setw(12) << it->second << endl;
     }
 
-//    cout << "\nRemove all ..." << endl;
-//
-//    table.remove("2");
-//    table.remove("4");
-//    table.remove("8");
-//    table.remove("100");
-//
-//    if (table.empty())
-//        cout << "Table is empty!" << endl << endl;
+    cout << "\nRemove all ..." << endl;
+
+   // table.remove("2");
+   // table.remove("4");
+    //table.remove("8");
+   // table.remove("100");
+
+    if (table.empty())
+        cout << "Table is empty!" << endl << endl;
 
     cout << "All tests passed successfully!!" << endl << endl;
 

@@ -1,6 +1,6 @@
 /**********************************************
 * File: main.cpp                              *
-* Author: Aida Nordman                        *
+* Author: Daniel Holst                        *
 * Course: TND004, Lab 3                       *
 * Date: VT2, 2015                             *
 * Description: frequency table                *
@@ -19,18 +19,46 @@
 
 using namespace std;
 
-
+string Unvalid_chars = "(-.,!?/\");:";
 
 /*******************************
 * 2. Main function             *
 ********************************/
 
+bool isNotAlnum(char c)
+{
+    for(int i = 0; i < Unvalid_chars.size(); i++)
+    {
+        if(c == Unvalid_chars[i])
+            return true;
+    }
+    return false;
+}
+
+void displayTable(MAP& table)
+{
+    cout << "Frequency table sorted alphabetically..." << endl << endl
+        << setw(15) << "KEY" << setw(10) << "" << "COUNTER" << endl
+        << "=================================" << endl;
+
+    BiIterator it = table.begin();
+
+    while(it != table.end())
+    {
+        cout << setw(15) << right << it->first
+             << setw(15) << it->second << endl;
+
+        it++;
+
+    }
+}
 
 int main()
 {
     MAP table;
 
-    string name;
+    string name, s;
+    int count = 0;
 
     /******************************************************
     * PHASE 0: Load the words in the text file            *
@@ -74,7 +102,12 @@ int main()
     * - frequency table                                   *
     *******************************************************/
 
-    //ADD CODE
+    cout << "Number of words in file: " << count << endl;
+    cout << "Number of unique words in file: " << table.size() << endl << endl;
+    cout << "---------------------------------------------- " << endl << endl;
+
+
+    displayTable(table);
 
 
     /******************************************************
@@ -85,18 +118,61 @@ int main()
     string wait;
     getline(cin, wait);
 
-    //ADD CODE
+    vector<string> vec(0);
+    BiIterator it1 = table.begin();
 
+    while (it1 != table.end())
+    {
+        if(it1->second == 1)     //if word is unique
+            vec.push_back(it1->first);
 
+        it1++;
+    }
+    cout << vec.size() << endl;
+    for(int i = 0; i < vec.size(); i++)
+    {
+        cout << vec.at(i) << endl;
+        table.remove(vec.at(i));
+        count--;
+    }
+
+    cout << "Number of words in file after remove: " << count << endl << endl;
+
+    displayTable(table);
 
     /***********************************************************
     * PHASE 4: request two words to the user w1 and w2         *
     *          then display all words in the interval [w1,w2]  *
     ************************************************************/
 
-    //ADD CODE
+    string input1, input2;
+
+    cout << "Enter two words: ";
+    cin >> input1 >> input2;
+
+    cout << "Frequency table in [" << input1 << "," << input2 << "]" << endl
+              << setw(15) << "KEY" << setw(10) << "" << "COUNTER" << endl
+              << "=================================" << endl;
+
+    if(table.find(input1) == table.end() || table.find(input2) == table.end() || input2 < input1)
+        cout << "ERROR! Input string(s) does not exist in table or interval is not entered as [min, max]" << endl;
+
+    else
+    {
+
+        BiIterator it2 = table.find(input2);
+
+        while(it2 != table.begin())
+        {
+            cout << setw(15) << right << it2->first
+                 << setw(15) << it2->second << endl;
 
 
+            if(it2->first == input1)
+                break;
+        }
+
+    }
 
     return 0;
 }

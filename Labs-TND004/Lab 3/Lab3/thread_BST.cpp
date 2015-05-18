@@ -29,7 +29,10 @@ BST_threaded::BST_threaded()
 //destructor
 BST_threaded::~BST_threaded()
 {
-  //ADD CODE
+  while(root->left)
+    root->left->remove(root->left->value.first, root, false);
+
+  delete root;
 }
 
 //Test if the tree is empty
@@ -96,7 +99,7 @@ ELEMENT& BST_threaded::operator[](string key)
         ELEMENT tempElement;
         tempElement.first = key;
         tempElement.second = 0;
-        root->left->insert(tempElement);
+        insert(tempElement);
         tempNode = root->left->find(key);
         return tempNode->value;
     }
@@ -142,7 +145,6 @@ BiIterator BST_threaded::begin() const
         {
             tempNode = tempNode->left;
         }
-        cout << tempNode->value.first << endl;
         return BiIterator(tempNode);
     }
 }

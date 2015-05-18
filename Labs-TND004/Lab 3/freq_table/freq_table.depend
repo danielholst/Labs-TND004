@@ -1,0 +1,34 @@
+# depslib dependency file v1.0
+1431498132 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 3\lab3\biiterator.cpp
+	"BiIterator.h"
+
+1431498132 c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 3\lab3\biiterator.h
+	<iostream>
+	"node.h"
+
+1431689452 c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 3\lab3\node.h
+	<iostream>
+	<string>
+	<utility>
+
+1431942180 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 3\lab3\main.cpp
+	"threaded_BST.h"
+	"BiIterator.h"
+	<iostream>
+	<iomanip>
+	<algorithm>
+	<string>
+	<fstream>
+	<vector>
+
+1431498132 c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 3\lab3\threaded_bst.h
+	"node.h"
+	"BiIterator.h"
+	<iostream>
+
+1431770434 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 3\lab3\node.cpp
+	"node.h"
+
+1431939811 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 3\lab3\thread_bst.cpp
+	"threaded_BST.h"
+

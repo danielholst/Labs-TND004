@@ -29,8 +29,7 @@ BST_threaded::BST_threaded()
 //destructor
 BST_threaded::~BST_threaded()
 {
-  while(root->left)
-    root->left->remove(root->left->value.first, root, false);
+    root->~Node();
 
   delete root;
 }
@@ -76,7 +75,11 @@ void BST_threaded::remove(string key)
 {
     //if key exists in tree, remove it. else do nothing
    if (root->left->find(key) != nullptr)
-        counter -= root->left->remove(key,root, false);
+   {
+       cout << "removing " << key << "..." << endl;
+       counter -= root->left->remove(key,root, false);
+   }
+
 }
 
 

@@ -136,7 +136,7 @@ int main()
         count--;
     }
 
-    cout << "Number of words in file after remove: " << count << endl << endl;
+    cout << "Number of words in file after remove: " << table.size() << endl << endl;
 
     displayTable(table);
 

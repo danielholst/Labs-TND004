@@ -22,7 +22,10 @@ Node::Node(ELEMENT v, Node *l, Node *r)
 //recursively deletes the nodes in the left_subtree and right-subtree
 Node::~Node()
 {
-    //ADD CODE
+//    delete left;
+//    delete right;
+//    while(this->left)
+//        remove(this->left->value.first, this, false);
 }
 
 
@@ -84,7 +87,7 @@ bool Node::remove(string key, Node* parent, bool isRight)
     Node* childNode = this;
     Node* parentNode = parent;
 
-    while(childNode->value.first != key)
+    while(childNode->value.first != key)    //finds the right key
     {
         parentNode = childNode;
         if(key < childNode->value.first)
@@ -96,6 +99,7 @@ bool Node::remove(string key, Node* parent, bool isRight)
     //if child has two childs
     if(!childNode->r_thread && !childNode->l_thread)
     {
+        cout << "debug: entered case of two childs in remove .." << endl;
         Node* tempNode = childNode;
         parentNode = childNode;
         childNode = childNode->left;
@@ -104,9 +108,9 @@ bool Node::remove(string key, Node* parent, bool isRight)
             parentNode = childNode;
             childNode = childNode->right;
         }
-        tempNode->value = childNode->value;
+        tempNode->value = childNode->value;     //replace value
 
-        if(childNode->value.first < parentNode->value.first || childNode->value.first == parentNode->value.first)
+        if(childNode->value.first <= parentNode->value.first)
             removeMe(parentNode, false);
         else
             removeMe(parentNode, true);
@@ -124,20 +128,6 @@ bool Node::remove(string key, Node* parent, bool isRight)
 
 }
 
-//re-thread the parentNode
-void Node::reThread(Node* parentNode, Node* childNode, bool isRight)
-{
-    if(isRight)
-    {
-        parentNode->right = childNode->right;
-        parentNode->r_thread = childNode->r_thread;
-    }
-    else
-    {
-        parentNode->l_thread = childNode->l_thread;
-        parentNode->left = childNode->left;
-    }
-}
 //Remove this node -- this node has at most one child
 //isRight==false: this node is left child of parent
 //isRight==true: this node is right child of parent
@@ -151,9 +141,9 @@ void Node::reThread(Node* parentNode, Node* childNode, bool isRight)
 //3   a child with two children
 void Node::removeMe(Node* parent, bool isRight)
 {
+    cout << "debug: entered removeMe" << endl;
     Node* childNode;
     Node* parentNode = parent;
-    Node* tempNode;
     string tempValue;
 
     if(isRight)
@@ -164,34 +154,42 @@ void Node::removeMe(Node* parent, bool isRight)
     //if childNode has no childs (case 1c and 2c)
     if(childNode->l_thread && childNode->r_thread)
     {
+        cout << "debug: case no childs " << endl;
         //rethread
-        reThread(parentNode, childNode, isRight);
+        if(isRight)
+        {
+            parentNode->right = childNode->right;
+            parentNode->r_thread = childNode->r_thread;
+        }
+        else
+        {
+            parentNode->l_thread = childNode->l_thread;
+            parentNode->left = childNode->left;
+        }
     }
 
     //if left child with only a right child (case 1a)
     else if(!isRight && childNode->l_thread && !childNode->r_thread)
     {
-        //parentNode->value.first = childNode->value.first;
-        parentNode->right = childNode->right;
-        parentNode->r_thread = childNode->r_thread;
+        cout << "debug: case left child with right child " << endl;
+        parentNode->left = childNode->right;
         childNode->right->findMin()->left = childNode->left;
+
     }
 
     //if right child with only a right child (case 1b)
     else if(isRight && childNode->l_thread && !childNode->r_thread)
     {
-        //parentNode->value.first = childNode->value.first;
+        cout << "debug: case right child with right child " << endl;
         parentNode->left = childNode->left;
-        parentNode->l_thread = childNode->l_thread;
         childNode->right->findMin()->left = childNode->left;
     }
 
     //if left child with only a left child (case 2a)
     else if(!isRight && childNode->r_thread && !childNode->l_thread)
     {
-        //parentNode->value.first = childNode->value.first;
+        cout << "debug: case left child with left child " << endl;
         parentNode->left = childNode->left;
-        parentNode->l_thread = childNode->l_thread;
         childNode->left->findMax()->right = childNode->right;
 
     }
@@ -199,13 +197,16 @@ void Node::removeMe(Node* parent, bool isRight)
     //if right child with only a left child (case 2b)
     else if(isRight && childNode->r_thread && !childNode->l_thread)
     {
-        //parentNode->value.first = childNode->value.first;
-        parentNode->right = childNode->right;
-        parentNode->r_thread = childNode->r_thread;
+        cout << "debug: case right child with left child " << endl;
+        parentNode->right = childNode->left;
         childNode->left->findMax()->right = childNode->right;
     }
 
+    else
+        cout << "something went wrong in removeMe..." << endl;
+
     //delete childNode
+    cout << "deleting node " << childNode->value.first << endl << endl;
     delete childNode;
 
 }

@@ -29,9 +29,8 @@ BST_threaded::BST_threaded()
 //destructor
 BST_threaded::~BST_threaded()
 {
-    root->~Node();
-
-  delete root;
+    //root->~Node();
+    delete root;
 }
 
 //Test if the tree is empty
@@ -76,7 +75,7 @@ void BST_threaded::remove(string key)
     //if key exists in tree, remove it. else do nothing
    if (root->left->find(key) != nullptr)
    {
-       cout << "removing " << key << "..." << endl;
+       //cout << "removing " << key << "..." << endl;
        counter -= root->left->remove(key,root, false);
    }
 
@@ -90,7 +89,12 @@ void BST_threaded::remove(string key)
 //then an ELEMENT (key,0) is inserted and a reference to it is returned
 ELEMENT& BST_threaded::operator[](string key)
 {
+    ELEMENT tempElement;
+    tempElement.first = key;
+    tempElement.second = 0;
     Node* tempNode;
+    if(empty())
+       insert(tempElement);
 
     if(root->left->find(key) != nullptr)
     {
@@ -99,9 +103,6 @@ ELEMENT& BST_threaded::operator[](string key)
     }
     else
     {
-        ELEMENT tempElement;
-        tempElement.first = key;
-        tempElement.second = 0;
         insert(tempElement);
         tempNode = root->left->find(key);
         return tempNode->value;
@@ -144,7 +145,7 @@ BiIterator BST_threaded::begin() const
     else
     {
         Node* tempNode = root->left;
-        while (!(tempNode->l_thread))   // goes to the smallest node , at the bottom left
+        while (!tempNode->l_thread)  // goes to the smallest node , at the bottom left
         {
             tempNode = tempNode->left;
         }

@@ -128,10 +128,10 @@ int main()
 
         it1++;
     }
-    cout << vec.size() << endl;
+
     for(int i = 0; i < vec.size(); i++)
     {
-        cout << vec.at(i) << endl;
+        //cout << vec.at(i) << endl;
         table.remove(vec.at(i));
         count--;
     }
@@ -139,6 +139,8 @@ int main()
     cout << "Number of words in file after remove: " << table.size() << endl << endl;
 
     displayTable(table);
+
+    cout << endl;
 
     /***********************************************************
     * PHASE 4: request two words to the user w1 and w2         *
@@ -170,7 +172,11 @@ int main()
 
             if(it2->first == input1)
                 break;
+
+            it2--;
         }
+        if(input1 == table.begin()->first)
+            cout << setw(15) << right << table.begin()->first << setw(15) << table.begin()->second << endl;
 
     }
 

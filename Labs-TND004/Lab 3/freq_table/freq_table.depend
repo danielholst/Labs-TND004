@@ -11,7 +11,7 @@
 	<string>
 	<utility>
 
-1431942738 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 3\lab3\main.cpp
+1432030723 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 3\lab3\main.cpp
 	"threaded_BST.h"
 	"BiIterator.h"
 	<iostream>
@@ -26,9 +26,9 @@
 	"BiIterator.h"
 	<iostream>
 
-1432024906 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 3\lab3\node.cpp
+1432033396 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 3\lab3\node.cpp
 	"node.h"
 
-1432023146 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 3\lab3\thread_bst.cpp
+1432032871 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 3\lab3\thread_bst.cpp
 	"threaded_BST.h"
 

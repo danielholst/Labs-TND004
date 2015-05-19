@@ -11,10 +11,10 @@
 	<string>
 	<utility>
 
-1432024883 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 3\lab3\node.cpp
+1432039066 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 3\lab3\node.cpp
 	"node.h"
 
-1431969439 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 3\lab3\test1.cpp
+1432039329 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 3\lab3\test1.cpp
 	"threaded_BST.h"
 	"BiIterator.h"
 	<iostream>
@@ -25,6 +25,6 @@
 	"BiIterator.h"
 	<iostream>
 
-1432033370 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 3\lab3\thread_bst.cpp
+1432039288 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 3\lab3\thread_bst.cpp
 	"threaded_BST.h"
 

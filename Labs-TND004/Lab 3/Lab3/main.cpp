@@ -176,7 +176,8 @@ int main()
             it2--;
         }
         if(input1 == table.begin()->first)
-            cout << setw(15) << right << table.begin()->first << setw(15) << table.begin()->second << endl;
+            cout << setw(15) << right << table.begin()->first
+                 << setw(15) << table.begin()->second << endl;
 
     }
 

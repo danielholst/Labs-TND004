@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1432213107 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 4a\digraph.cpp
+1432218032 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 4a\digraph.cpp
 	<iostream>
 	<iomanip>
 	<cassert>
@@ -14,7 +14,7 @@
 1305021600 c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 4a\queue.h
 	<cassert>
 
-1305021600 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 4a\main.cpp
+1432219642 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 4a\main.cpp
 	<iostream>
 	<fstream>
 	<string>

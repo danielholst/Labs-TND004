@@ -65,7 +65,6 @@ int main()
                 break;
             case 6:
                 t = readInt("Target t    ? ");
-                cout << "\nShortest path =";
                 G->printPath(t);
                 break;
             case 9:

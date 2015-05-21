@@ -188,6 +188,7 @@ void Digraph::pwsssp(int s)
                         {
                             cout << "updated distance for " << nextVal << " from " << dist[nextVal] << " to " << (dist[thisVal] +p->weight) << endl;
                             dist[nextVal] = dist[thisVal] + p->weight;
+                            path[nextVal] = thisVal;
                         }
 
                     }
@@ -256,5 +257,21 @@ void Digraph::printPath(int t) const
     }
 
     cout << "Shortest path from " << start << " to " << t << " = " << dist[t] << endl << endl;
+    vector<int> pathVec;
+    int previous = path[t];
+    while(previous != start)
+    {
+        pathVec.push_back(previous);
+        previous = path[previous];
+    }
+
+
+    cout << start << " -> ";
+    for(int i = pathVec.size()-1; i >= 0; i--)
+    {
+        cout << pathVec.at(i) << " -> ";
+
+    }
+    cout << t << endl << endl;;
 
 }

@@ -1,8 +1,9 @@
 # depslib dependency file v1.0
-1432218032 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 4a\digraph.cpp
+1432241007 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 4a\digraph.cpp
 	<iostream>
 	<iomanip>
 	<cassert>
+	<vector>
 	"digraph.h"
 	"queue.h"
 

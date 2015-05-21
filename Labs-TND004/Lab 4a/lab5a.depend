@@ -1,0 +1,28 @@
+# depslib dependency file v1.0
+1432213107 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 4a\digraph.cpp
+	<iostream>
+	<iomanip>
+	<cassert>
+	"digraph.h"
+	"queue.h"
+
+1305021600 c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 4a\digraph.h
+	"list.h"
+
+1432129907 c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 4a\list.h
+
+1305021600 c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 4a\queue.h
+	<cassert>
+
+1305021600 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 4a\main.cpp
+	<iostream>
+	<fstream>
+	<string>
+	<cstdlib>
+	"digraph.h"
+
+1432210489 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 4a\list.cpp
+	<iostream>
+	<iomanip>
+	"list.h"
+

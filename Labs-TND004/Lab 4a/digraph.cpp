@@ -61,11 +61,64 @@ void Digraph::uwsssp(int s)
 {
     if (s < 1 || s > size)
     {
-         cout << "\nERROR: expected source s in range 1.." << size << " !" << endl;
-         return;
+        cout << "\nERROR: expected source s in range 1.." << size << " !" << endl;
+        return;
     }
 
-    // *** TODO ***    
+    //case if first node is not connected to any nodes
+    else if(array[s].getFirst() == nullptr)
+    {
+        dist[s] = 0;
+        done[s] = true;
+        cout << " No connected nodes " << endl;
+    }
+
+    else
+    {
+        Queue<int> Q;
+
+        //initialize the distance and paths
+        for(int i = 0; i < size+1; i++)
+        {
+            dist[i] = INFINITY;
+            path[i] = 0;
+        }
+
+        //set distance of start position to 0
+        dist[s] = 0;
+        done[s] = true;
+        Q.enqueue(s);
+
+        while(!Q.isEmpty())
+        {
+            //cout << "debug: In first while " << endl;
+            int thisVal = Q.getFront();
+            Q.dequeue();
+
+            Node* p = array[thisVal].getFirst();
+
+            //cout << "debug: first value = " << p->vertex << endl;
+            while(p != nullptr)
+            {
+                //cout << "debug: In second while" << endl;
+                int nextVal = p->vertex;
+                if(p != nullptr)
+                {
+                    if(dist[nextVal] == INFINITY)    //if next node haven't been visited
+                    {
+                        cout << "debug: next has not been visited " << endl;
+                        dist[nextVal] = dist[thisVal] + 1;
+                        path[nextVal] = thisVal;
+                        Q.enqueue(nextVal);
+                        cout << "added " << nextVal << " to the queue " << endl;
+                    }
+                    else
+                        cout << "debug: next node has already been visited ( " << nextVal << " )" << endl;
+                }
+                p = array[thisVal].getNext();
+            }
+        }
+    }
 }
 
 // positive weighted single source shortest pats
@@ -73,11 +126,11 @@ void Digraph::pwsssp(int s)
 {
     if (s < 1 || s > size)
     {
-         cout << "\nERROR: expected source s in range 1.." << size << " !" << endl;
-         return;
+        cout << "\nERROR: expected source s in range 1.." << size << " !" << endl;
+        return;
     }
-    
-    // *** TODO ***    
+
+    // *** TODO ***
 }
 
 // print graph
@@ -102,7 +155,7 @@ void Digraph::printTree() const
     cout << "----------------------" << endl;
     cout << "vertex    dist    path" << endl;
     cout << "----------------------" << endl;
-    
+
     for (int v = 1; v <= size; v++)
     {
         cout << setw(4) << v << " :" << setw(8) << dist[v] << setw(8) << path[v] << endl;
@@ -116,9 +169,9 @@ void Digraph::printPath(int t) const
 {
     if (t < 1 || t > size)
     {
-         cout << "\nERROR: expected target t in range 1.." << size << " !" << endl;
-         return;
+        cout << "\nERROR: expected target t in range 1.." << size << " !" << endl;
+        return;
     }
-    
-    // *** TODO ***    
+
+    // *** TODO ***
 }

@@ -11,7 +11,7 @@
 class Node {
 public:
     // -- CONSTRUCTORS
-    Node(int v = 0, int w = 0, Node *n = NULL)
+    Node(int v = 0, int w = 0, Node *n = nullptr)
     : vertex(v), weight(w), next(n) { }
     // -- DATA MEMBERS
     int vertex;

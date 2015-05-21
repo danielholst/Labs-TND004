@@ -23,7 +23,7 @@ List::List()
 
 List::~List()
 {
-    while (header != NULL)
+    while (header != nullptr)
     {
         Node *temp = header;
         header = temp->next;
@@ -43,7 +43,7 @@ Node * List::getFirst()
 // return pointer to next node (or NULL)
 Node * List::getNext()
 {
-    if (current != NULL)
+    if (current != nullptr)
     {
         current = current->next;
     }
@@ -55,13 +55,13 @@ Node * List::getNext()
 void List::insert(int v, int w)
 {
     Node *p = header;
-     
-    while (p->next != NULL && p->next->vertex < v)
+
+    while (p->next != nullptr && p->next->vertex < v)
     {
         p = p->next;
     }
-     
-    if (p->next == NULL || p->next->vertex > v)
+
+    if (p->next == nullptr || p->next->vertex > v)
     {
         p->next = new Node(v, w, p->next);
     }
@@ -69,7 +69,7 @@ void List::insert(int v, int w)
     {
         p->next->weight = w;
     }
-    
+
     current = header->next;
 }
 
@@ -77,13 +77,13 @@ void List::insert(int v, int w)
 void List::remove(int v)
 {
     Node *p = header;
-     
-    while (p->next != NULL && p->next->vertex < v)
+
+    while (p->next != nullptr && p->next->vertex < v)
     {
         p = p->next;
     }
-     
-    if (p->next != NULL && p->next->vertex == v)
+
+    if (p->next != nullptr && p->next->vertex == v)
     {
         Node *temp = p->next;
         p->next = temp->next;
@@ -97,10 +97,10 @@ void List::remove(int v)
 void List::print() const
 {
     Node *p = header->next;
-     
-    while (p != NULL)
+
+    while (p != nullptr)
     {
-        cout << " (" << setw(2) << p->vertex 
+        cout << " (" << setw(2) << p->vertex
              << ", " << setw(2) << p->weight << ") ";
         p = p->next;
     }

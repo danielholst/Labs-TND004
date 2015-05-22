@@ -57,7 +57,69 @@ void Graph::removeEdge(int u, int v)
 // Prim's minimum spanning tree algorithm
 void Graph::mstPrim() const
 {
-    // *** TODO ***
+
+    //start vertex
+    int start = 5;
+
+    int dist[size];
+    int path[size];
+    bool done[size];
+    Heap<int> H;
+
+    for(int i = 0; i < size; i++)
+    {
+        dist[i] = INFINITY;
+        path[i] = 0;
+        done[i] = false;
+    }
+
+    //init start position
+    dist[start] = 0;
+    done[start] = true;
+
+    Node* i =  array[start].getFirst();
+    done[i->vertex] = true;
+    dist[i->vertex] = i->weight;
+    Edge E = Edge(start, i->vertex, i->weight);
+    cout << i->vertex << " ";
+    H.insert(E.weight);
+
+    i = array[start].getNext();
+    while(!H.isEmpty())
+    {
+
+        while(i != nullptr)
+        {
+
+            //if node has not been visited
+            if(!done[i->vertex])
+            {
+                H.insert( i->weight );
+                done[i->vertex] = true;
+                dist[i->vertex] = i->weight;
+                //path[i->vertex] =
+                cout << i->vertex << " ";
+            }
+            i = array[start].getNext();
+
+        }
+        int k = H.deleteMin();
+        i = array[start].getFirst();
+        while (i != nullptr)
+        {
+            //find shortest path
+            if( i->weight == k)
+            {
+                cout << " found shortest path -> to " << i->vertex << endl;
+                start = i->vertex;
+                i = array[start].getFirst();
+                break;
+            }
+            i = array[start].getNext();
+
+        }
+
+    }
 }
 
 // Kruskal's minimum spanning tree algorithm

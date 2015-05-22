@@ -1,0 +1,46 @@
+# depslib dependency file v1.0
+1305021600 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 4b\dsets.cpp
+	<iostream>
+	<iomanip>
+	<cassert>
+	"dsets.h"
+
+1305021600 c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 4b\dsets.h
+
+1305021600 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 4b\edge.cpp
+	<iostream>
+	<iomanip>
+	"edge.h"
+
+1305021600 c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 4b\edge.h
+	<utility>
+
+1432285073 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 4b\graph.cpp
+	<iostream>
+	<iomanip>
+	<cassert>
+	"graph.h"
+	"edge.h"
+	"heap.h"
+	"dsets.h"
+
+1305021600 c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 4b\graph.h
+	"list.h"
+
+1305021600 c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 4b\list.h
+
+1305021600 c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 4b\heap.h
+	<cassert>
+
+1305021600 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 4b\list.cpp
+	<iostream>
+	<iomanip>
+	"list.h"
+
+1305021600 source:c:\arne\projekt\tnd004\labs-tnd004\labs-tnd004\lab 4b\main.cpp
+	<iostream>
+	<fstream>
+	<string>
+	<cstdlib>
+	"graph.h"
+

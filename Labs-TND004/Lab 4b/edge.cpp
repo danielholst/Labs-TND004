@@ -27,9 +27,9 @@ bool Edge::operator==(const Edge &e) const
 
 ostream & operator<< (ostream &os, const Edge &e)
 {
-    os << "(" << setw(2) << e.head   << ", " 
+    os << "(" << setw(2) << e.head   << ", "
               << setw(2) << e.tail   << ", "
               << setw(2) << e.weight << ") ";
-              
+
     return os;
 }

@@ -60,66 +60,103 @@ void Graph::mstPrim() const
 
     //start vertex
     int start = 5;
-
+    int endVertex;
+    int totalWeight = 0;
     int dist[size];
     int path[size];
     bool done[size];
+    Edge edges[size];
     Heap<int> H;
 
-    for(int i = 0; i < size; i++)
+    for(int i = 1; i < size +1 ; i++)
     {
         dist[i] = INFINITY;
         path[i] = 0;
-        done[i] = false;
+        done[i] = 0;
     }
 
     //init start position
     dist[start] = 0;
-    done[start] = true;
+    done[start] = 1;
 
     Node* i =  array[start].getFirst();
-    done[i->vertex] = true;
     dist[i->vertex] = i->weight;
-    Edge E = Edge(start, i->vertex, i->weight);
-    cout << i->vertex << " ";
-    H.insert(E.weight);
-
+    edges[i->weight] = Edge(start, i->vertex, i->weight);
+    //cout << "connected node that has not yet been visited " << i->vertex << endl;
+    H.insert(i->weight);
+    int counter = 1;
+    int current = start;
     i = array[start].getNext();
     while(!H.isEmpty())
     {
-
         while(i != nullptr)
         {
-
+//            cout << "boolean (1) " << done[4] << endl;
+//            cout << "this vertex = " << i->vertex << endl;
             //if node has not been visited
-            if(!done[i->vertex])
+            if(!done[i->vertex] && dist[i->vertex] == INFINITY)
             {
                 H.insert( i->weight );
-                done[i->vertex] = true;
+                edges[i->weight] = Edge(current, i->vertex, i->weight);
+                //cout << edges[i->weight] << endl;
                 dist[i->vertex] = i->weight;
-                //path[i->vertex] =
-                cout << i->vertex << " ";
+                //cout << "connected node that has not yet been visited "<< i->vertex << endl;
             }
-            i = array[start].getNext();
-
-        }
-        int k = H.deleteMin();
-        i = array[start].getFirst();
-        while (i != nullptr)
-        {
-            //find shortest path
-            if( i->weight == k)
+            else if((done[i->vertex] != 1) && (i->weight < dist[i->vertex]))
             {
-                cout << " found shortest path -> to " << i->vertex << endl;
-                start = i->vertex;
-                i = array[start].getFirst();
+                int f = i->vertex;
+//                cout << "boolean (3)" << done[4] << endl;
+                //cout << " replace value .." << edges[dist[f]].weight << " with " << i->weight << endl;
+                H.insert(i->weight);
+//                cout << "boolean (4)" << done[4] << endl;
+                edges[dist[f]] = Edge(0,0,0);
+//                cout << "boolean (5)" << done[4] << endl;
+                edges[i->weight] = Edge(current, i->vertex, i->weight);
+                //cout << edges[i->weight] << endl;
+//                cout << "boolean (6)" << done[4] << endl;
+                dist[f] = i->weight;
+                if(done[4] > 1) done[4] = 1;
+//                cout << "boolean (7)" << done[4] << endl;
+
+            }
+            else
+                //cout << "already visited this node .. " << endl;
+
+            i = array[current].getNext();
+        }
+
+        if(!H.isEmpty())
+        {
+            int k = H.deleteMin();
+
+//            while(edges[k].head == 0)
+//            {
+//                cout << "throw " << k << "and get next from heap .." << endl;
+//                if(H.isEmpty())
+//                    return;
+//                k = H.deleteMin();
+//            }
+            totalWeight += edges[k].weight;
+            cout << edges[k] << endl;
+            current = edges[k].tail;
+            //cout << "move to -> " << current << endl;
+            done[current] = 1;
+            //cout << edges[current] << endl;
+            i = array[current].getFirst();
+            counter++;
+            if(counter == size)
+            {
+                endVertex = current;
+                //cout << "endVertex = " << endVertex << endl;
                 break;
             }
-            i = array[start].getNext();
+
 
         }
 
     }
+    cout << endl << "Total weight of graph = " << totalWeight << endl;
+
 }
 
 // Kruskal's minimum spanning tree algorithm

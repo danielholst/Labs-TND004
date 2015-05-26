@@ -66,6 +66,7 @@ void Graph::mstPrim() const
     int dist[size];
     int path[size];
     bool done[size];
+    Edge edges[size];
     Heap<Edge> H;
 
     //init arrays
@@ -81,46 +82,49 @@ void Graph::mstPrim() const
     done[current] = true;
 
     //handle first next node
-    Node* pointNode =  array[current].getFirst();
-    dist[pointNode->vertex] = pointNode->weight;
-    H.insert(Edge(current, pointNode->vertex, pointNode->weight));
-    pointNode = array[current].getNext();
+    Node* i =  array[current].getFirst();
+    dist[i->vertex] = i->weight;
+    edges[i->weight] = Edge(current, i->vertex, i->weight);
+    H.insert(current, i->vertex, i->weight);
+    i = array[current].getNext();
 
     while(!H.isEmpty())     //loop while the heap is not empty
     {
-        while(pointNode != nullptr)
+        while(i != nullptr)
         {
             //if node has not been visited
-            if(!done[pointNode->vertex] && dist[pointNode->vertex] == INFINITY)
+            if(!done[i->vertex] && dist[i->vertex] == INFINITY)
             {
-                H.insert(Edge(current, pointNode->vertex, pointNode->weight));
-                dist[pointNode->vertex] = pointNode->weight;
+                H.insert( i->weight );
+                edges[i->weight] = Edge(current, i->vertex, i->weight);
+                dist[i->vertex] = i->weight;
             }
-            else if(!done[pointNode->vertex] && pointNode->weight < dist[pointNode->vertex])
+            else if(!done[i->vertex] && i->weight < dist[i->vertex])
             {
-                H.insert(Edge(current, pointNode->vertex, pointNode->weight));
-                dist[pointNode->vertex] = pointNode->weight;
+                int f = i->vertex;
+                H.insert(i->weight);
+                edges[dist[f]] = Edge(0,0,0);
+                edges[i->weight] = Edge(current, i->vertex, i->weight);
+                dist[f] = i->weight;
+
+                //bug of the year right here
+                if(done[4] > 1) done[4] = 1;
             }
+            else
+//                cout << " node already visited " << endl;
 
-
-            pointNode = array[current].getNext();
+            i = array[current].getNext();
         }
 
         if(!H.isEmpty())
         {
-            Edge k = H.deleteMin();
-            while(done[k.tail])
-            {
-                if(H.isEmpty())
-                    break;
-                k = H.deleteMin();
-            }
+            int k = H.deleteMin();
 
-            totalWeight += k.weight;
-            cout << k << endl;
-            current = k.tail;
+            totalWeight += edges[k].weight;
+            cout << edges[k] << endl;
+            current = edges[k].tail;
             done[current] = true;
-            pointNode = array[current].getFirst();
+            i = array[current].getFirst();
             counter++;
             if(counter == size)
             {
@@ -138,6 +142,7 @@ void Graph::mstKruskal() const
     DSets D(size);
 
     Node* k = array[1].getFirst();
+    cout << "size = " << size << endl;
     //build heap with all edges
     for(int i = 1; i < size +1 ; i++)
     {
@@ -145,27 +150,32 @@ void Graph::mstKruskal() const
         while(k != nullptr)
         {
             Edge tempEdge = Edge(i, k->vertex, k->weight);
+            cout << tempEdge << endl;
             H.insert(tempEdge);
             k = array[i].getNext();
         }
     }
 
-    int totalWeight = 0;
     int counter = 0;
-    while(counter < size-1)
+    cout << endl << "in next loop" << endl << endl;
+    while(counter < size)
     {
-        Edge tempEdge = H.deleteMin();   //since there is duplicates of each path
-        //if thisNode and nextNode is not in the same tree
+        Edge tempEdge = H.deleteMin() =H.deleteMin();   //since there is duplicates of each path
+        cout << tempEdge << endl;
+        //if thisNode and nextNode is in the same tree
         if(D.find(tempEdge.head) != D.find(tempEdge.tail))
         {
-            D.join(D.find(tempEdge.head), D.find(tempEdge.tail));
+            D.join(tempEdge.head, tempEdge.tail);
             counter++;
-            totalWeight += tempEdge.weight;
-            cout << tempEdge << endl;
         }
     }
 
-    cout << endl << "Total weight of graph = " << totalWeight << endl;
+    D.print();
+
+    cout << "hej" << endl;
+
+
+
 }
 
 // print graph

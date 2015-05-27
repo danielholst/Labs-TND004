@@ -256,7 +256,6 @@ void Digraph::printPath(int t) const
         return;
     }
 
-    cout << "Shortest path from " << start << " to " << t << " = " << dist[t] << endl << endl;
     vector<int> pathVec;
     int previous = path[t];
     while(previous != start)
@@ -265,6 +264,7 @@ void Digraph::printPath(int t) const
         previous = path[previous];
     }
 
+    cout << "Shortest path from " << start << " to " << t << " = " << dist[t] << endl << endl;
 
     cout << start << " -> ";
     for(int i = pathVec.size()-1; i >= 0; i--)
